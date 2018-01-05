@@ -1,19 +1,19 @@
 {
-  "name": "cz-conventional-changelog",
-  "version": "0.0.0-semantically-released.0",
-  "description": "Commitizen adapter following the conventional-changelog format.",
+  "name": "d3c",
+  "version": "0.0.0",
+  "description": "Commitizen adapter following the conventional-changelog format for Decathlon.",
   "main": "index.js",
   "scripts": {
     "commit": "git-cz",
     "test": "echo 'Tests need to be setup!'",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "homepage": "https://github.com/commitizen/cz-conventional-changelog",
+  "homepage": "https://git.osiris.withoxylane.com/crm/d3c",
   "repository": {
     "type": "git",
-    "url": "https://github.com/commitizen/cz-conventional-changelog.git"
+    "url": "https://git.osiris.withoxylane.com/crm/d3c.git"
   },
-  "author": "Jim Cummins <jimthedev@gmail.com>",
+  "author": "Benjamin Desmarez <benjamin.desmarez@decathlon.com>, Jeremy Jousse <jeremy.jousse@decathlon.com>",
   "license": "MIT",
   "dependencies": {
     "conventional-commit-types": "^2.0.0",
