@@ -8,10 +8,10 @@
     "test": "echo 'Tests need to be setup!'",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "homepage": "https://git.osiris.withoxylane.com/crm/d3c",
+  "homepage": "https://github.com/bdesmarez/d3c",
   "repository": {
     "type": "git",
-    "url": "https://git.osiris.withoxylane.com/crm/d3c.git"
+    "url": "https://github.com/bdesmarez/d3c.git"
   },
   "author": "Benjamin Desmarez <benjamin.desmarez@decathlon.com>, Jeremy Jousse <jeremy.jousse@decathlon.com>",
   "license": "MIT",
