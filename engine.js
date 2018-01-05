@@ -68,29 +68,41 @@ module.exports = function (options) {
           message: 'Provide a longer description of the change: (press enter to skip)\n'
         }, {
           type: 'confirm',
-          name: 'isBreaking',
-          message: 'Are there any breaking changes?',
-          default: false
+          name: 'isJiraRelated',
+          message: 'Is this commit related to any Jira?',
+          default: true
         }, {
           type: 'input',
-          name: 'breaking',
-          message: 'Describe the breaking changes:\n',
+          name: 'jira',
+          message: 'Add Jira references (e.g. "CRMDKT-3615", "CRMDKT-3990".):\n',
           when: function(answers) {
-            return answers.isBreaking;
-          }
-        }, {
-          type: 'confirm',
-          name: 'isIssueAffected',
-          message: 'Does this change affect any open issues?',
-          default: false
-        }, {
-          type: 'input',
-          name: 'issues',
-          message: 'Add issue references (e.g. "fix #123", "re #123".):\n',
-          when: function(answers) {
-            return answers.isIssueAffected;
+            return answers.isJiraRelated;
           }
         }
+        // }, {
+        //   type: 'confirm',
+        //   name: 'isBreaking',
+        //   message: 'Are there any breaking changes?',
+        //   default: false
+        // }, {
+        //   type: 'input',
+        //   name: 'breaking',
+        //   message: 'Describe the breaking changes:\n',
+        //   when: function(answers) {
+        //     return answers.isBreaking;
+        //   }
+        // }, {
+        //   type: 'confirm',
+        //   name: 'isIssueAffected',
+        //   message: 'Does this change affect any open issues?',
+        //   default: false
+        // }, {
+        //   type: 'input',
+        //   name: 'issues',
+        //   message: 'Add issue references (e.g. "fix #123", "re #123".):\n',
+        //   when: function(answers) {
+        //     return answers.isIssueAffected;
+        //   }
       ]).then(function(answers) {
 
         var maxLineWidth = 100;
@@ -106,8 +118,10 @@ module.exports = function (options) {
         var scope = answers.scope.trim();
         scope = scope ? '(' + answers.scope.trim() + ')' : '';
 
+        var jira = answers.jira ? (answers.jira + ' ') : '';
+
         // Hard limit this line
-        var head = (answers.type + scope + ': ' + answers.subject.trim()).slice(0, maxLineWidth);
+        var head = (answers.type + scope + ': ' + jira + answers.subject.trim()).slice(0, maxLineWidth);
 
         // Wrap these lines at 100 characters
         var body = wrap(answers.body, wrapOptions);
@@ -117,11 +131,10 @@ module.exports = function (options) {
         breaking = breaking ? 'BREAKING CHANGE: ' + breaking.replace(/^BREAKING CHANGE: /, '') : '';
         breaking = wrap(breaking, wrapOptions);
 
-        var issues = answers.issues ? wrap(answers.issues, wrapOptions) : '';
 
-        var footer = filter([ breaking, issues ]).join('\n\n');
+        // var footer = filter([ breaking, issues ]).join('\n\n');
 
-        commit(head + '\n\n' + body + '\n\n' + footer);
+        commit(head + '\n\n' + body );
       });
     }
   };
